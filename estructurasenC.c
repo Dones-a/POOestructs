@@ -42,41 +42,112 @@ momento, podrá ser reemplazado por otro (también previamente registrado en la em
 
 */
 
-struct obrero {
-int legajo;
-char nombre [30];
-char apellido [30];
-float sueldo;
-struct obra supervisada = NULL;
-} ;
 
-struct Profesional {
-int legajo;
-char nombre [30];
-char apellido [30];
-float sueldo;
+
+
+
+struct obrero {
+    int legajo;
+    char nombre [30];
+    char apellido [30];
+    char categoria[30];
+    //float sueldo;
+
 } ;
 
 struct obra{
 
-char codigo[20];
-char direccion [40];
-struct profesional acargo;
+    char codigo[20];
+    char direccion [40];
+
+
+};
+struct Profesional {
+    int legajo;
+    char nombre [30];
+    char apellido [30];
+    //float sueldo;
+    struct obra supervisada;
+} ;
+
+struct nodoProfesional {
+
+    struct Profesional;
+
+
+    struct nodo* siguiente;
+};
+
+
+
+
+struct nodoObrero {
+
+    struct obrero;
+
+    struct nodo* siguiente;
+};
+void Bdd ();
+
+
+int main() {
+
+    int eleccion;
+
+
+
+
+    printf("\t\tBienvenido al sistema de GESTION de REPARAR S.A. \n");
+
+
+    printf("\n\n \t  Coloque la opcion deseada ");
+
+
+    printf("\n\n  1- Buscar");
+    printf("\n\n  2- Agregar  ");
+    printf("\n\n  3- Modificar ");
+    printf("\n\n  4- Eliminar ");
+    printf("\n\n  5- Salir ");
+    printf("\n\n");
+
+    Bdd();
+
+
+
+    return 0;
+}
+;
+
+
+void Bdd (){
+
+//Cargamos los datos de los obreros primero con vectores para no tener usar una base de datos ni archivos de esta manera podemos hacer todo en tiempo de ejecucion
+
+//----------------------OBREROS--------------------------------------------------------//
+
+    int n =15,i=0;
+
+    int legajo[]={1,3,5,6,7,8,9,10,22,33,44,55,66,77,99};
+    char* nombre []={"Agustín", "Belen", "Camila", "Daniel", "Esteban", "Florencia", "Gonzalo", "Hugo", "Ivan", "Julieta",
+        "Kevin", "Laura", "Martín", "Natalia", "Oscar"};
+
+    char* apellido []={"Gonzalez", "Rodriguez", "Perez", "Fernandez", "Lopez",
+        "Martinez", "Gomez", "Diaz", "Sanchez", "Romero",
+        "Alvarez", "Torres", "Ramirez", "Flores", "Benitez"};
+    char* categoria[]={"oficial", "medio"," aprendiz","oficial", "medio"," aprendiz","oficial", "medio"," aprendiz",
+    "oficial", "medio"," aprendiz","oficial", "medio"," aprendiz"};
+
+    //float sueldo;
+
+
+    for(i=0;i<n;i++)
+        printf("\nHola soy %s  %s mi legajo es : %d y mi categoria es %s",nombre[i],apellido[i],legajo[i],categoria[i]);
 
 
 
 };
 
 
-int main() {
-
-
-asdasdasd
-
-
-
-
-sarasa
 
 
 
@@ -84,6 +155,20 @@ sarasa
 
 
 
-return 0;
-}
-;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
