@@ -46,14 +46,14 @@ momento, podrá ser reemplazado por otro (también previamente registrado en la em
 
 
 
-struct obrero {
+typedef struct s_obrero  {
     int legajo;
     char nombre [30];
     char apellido [30];
     char categoria[30];
     //float sueldo;
 
-} ;
+}s_obrero ;
 
 struct obra{
 
@@ -81,21 +81,27 @@ struct nodoProfesional {
 
 
 
-struct nodoObrero {
+typedef struct nodo_obrero {
 
-    struct obrero;
+    s_obrero obrero;
 
-    struct nodo* siguiente;
-};
+    struct nodo_obrero* siguiente;
+}nodo_obrero;
+
+//obrero * listaobreros();
+
+
+nodo_obrero * crearNodoObrero(int ,char[],char [],char[]);
+
 void Bdd ();
+
 
 
 int main() {
 
     int eleccion;
 
-
-
+    Bdd();
 
     printf("\t\tBienvenido al sistema de GESTION de REPARAR S.A. \n");
 
@@ -109,9 +115,6 @@ int main() {
     printf("\n\n  4- Eliminar ");
     printf("\n\n  5- Salir ");
     printf("\n\n");
-
-    Bdd();
-
 
 
     return 0;
@@ -128,32 +131,51 @@ void Bdd (){
     int n =15,i=0;
 
     int legajo[]={1,3,5,6,7,8,9,10,22,33,44,55,66,77,99};
-    char* nombre []={"Agustín", "Belen", "Camila", "Daniel", "Esteban", "Florencia", "Gonzalo", "Hugo", "Ivan", "Julieta",
-        "Kevin", "Laura", "Martín", "Natalia", "Oscar"};
+    char* nombre []={"Agustín", "Belen", "Camila", "Daniel", "Esteban", "Florencia", "Gonzalo", "Hugo", "Ivan", "Julieta","Kevin", "Laura", "Martín", "Natalia", "Oscar"};
 
-    char* apellido []={"Gonzalez", "Rodriguez", "Perez", "Fernandez", "Lopez",
-        "Martinez", "Gomez", "Diaz", "Sanchez", "Romero",
-        "Alvarez", "Torres", "Ramirez", "Flores", "Benitez"};
-    char* categoria[]={"oficial", "medio"," aprendiz","oficial", "medio"," aprendiz","oficial", "medio"," aprendiz",
-    "oficial", "medio"," aprendiz","oficial", "medio"," aprendiz"};
-
-    //float sueldo;
+    char* apellido []={"Gonzalez", "Rodriguez", "Perez", "Fernandez", "Lopez","Martinez", "Gomez", "Diaz", "Sanchez", "Romero","Alvarez", "Torres", "Ramirez", "Flores", "Benitez"};
+    char* categoria[]={"oficial", "medio"," aprendiz","oficial", "medio"," aprendiz","oficial", "medio"," aprendiz","oficial", "medio"," aprendiz","oficial", "medio"," aprendiz"};
 
 
-    for(i=0;i<n;i++)
-        printf("\nHola soy %s  %s mi legajo es : %d y mi categoria es %s",nombre[i],apellido[i],legajo[i],categoria[i]);
+
+    for(i=0;i<n;i++){
+        //printf("\nHola soy %s  %s mi legajo es : %d y mi categoria es %s",nombre[i],apellido[i],legajo[i],categoria[i]);
+        crearNodoObrero(legajo[i],nombre [i],apellido [i],categoria [i]);
+
+    }
+};
+
+nodo_obrero* insertar(){
+
+
 
 
 
 };
 
+nodo_obrero * crearNodoObrero(int legajo,char nombre [30],char apellido [30],char categoria[30]){
+                        //casteo para recibir el puntero del tipo especificado
+     nodo_obrero *nuevo = (nodo_obrero*)malloc(sizeof(nodo_obrero)); // Reservamos memoria
+    if (nuevo == NULL) {
+        printf("Error: No hay memoria disponible.\n");
+        return NULL;
+    }
 
 
+    // Llenamos los datos de la persona
+    strcpy(nuevo->obrero.nombre, nombre);
+    strcpy(nuevo->obrero.apellido, apellido);
+    strcpy(nuevo->obrero.categoria, categoria);
+    nuevo->obrero.legajo=legajo;
 
 
+    // El nuevo nodo apunta a NULL al principio
+    nuevo->siguiente = NULL;
+
+    return nuevo;
 
 
-
+};
 
 
 
