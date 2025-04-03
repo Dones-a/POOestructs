@@ -104,7 +104,7 @@ nodo_obrero * crearNodoObrero(int ,char[],char [],char[]);
 nodo_profesional * crearNodoProfesional(int ,char [],char []);
 void Bdd ();
 
-
+void crud();
 
 int main() {
 
@@ -159,13 +159,6 @@ void Bdd (){
     }
 };
 
-nodo_obrero* insertar(){
-
-
-
-
-
-};
 
 nodo_obrero * crearNodoObrero(int legajo,char nombre [30],char apellido [30],char categoria[30]){
 
@@ -218,7 +211,20 @@ nodo_profesional * crearNodoProfesional(int legajo,char nombre [30],char apellid
 
 
 
+void crud(){
+switch ()
 
+
+
+
+
+
+
+
+
+
+
+};
 
 
 
