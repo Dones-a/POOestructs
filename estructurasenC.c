@@ -55,32 +55,6 @@ typedef struct s_obrero  {
 
 }s_obrero ;
 
-struct obra{
-
-    char codigo[20];
-    char direccion [40];
-
-
-};
-struct Profesional {
-    int legajo;
-    char nombre [30];
-    char apellido [30];
-    //float sueldo;
-    struct obra supervisada;
-} ;
-
-struct nodoProfesional {
-
-    struct Profesional;
-
-
-    struct nodo* siguiente;
-};
-
-
-
-
 typedef struct nodo_obrero {
 
     s_obrero obrero;
@@ -88,23 +62,57 @@ typedef struct nodo_obrero {
     struct nodo_obrero* siguiente;
 }nodo_obrero;
 
-//obrero * listaobreros();
+typedef struct s_obra{
+
+    char codigo[20];
+    char direccion [40];
+
+
+}s_obra;
+
+typedef struct s_profesional {
+    int legajo;
+    char nombre [30];
+    char apellido [30];
+    //s_obra * supervisada;
+}s_profesional ;
+
+typedef struct nodo_profesional {
+
+    s_profesional profesional;
+
+
+    struct nodo_profesional* siguiente;
+}nodo_profesional;
+
+
+
+
+
+
+
+
+
+//------------------------------------Listas-----------------------//
+nodo_obrero* listaObreros = NULL;                                  //
+nodo_profesional* listaProfesionales = NULL;                       //
+//-----------------------------------------------------------------//
+
 
 
 nodo_obrero * crearNodoObrero(int ,char[],char [],char[]);
-
+nodo_profesional * crearNodoProfesional(int ,char [],char []);
 void Bdd ();
 
 
 
 int main() {
 
-    int eleccion;
+
 
     Bdd();
 
     printf("\t\tBienvenido al sistema de GESTION de REPARAR S.A. \n");
-
 
     printf("\n\n \t  Coloque la opcion deseada ");
 
@@ -116,6 +124,8 @@ int main() {
     printf("\n\n  5- Salir ");
     printf("\n\n");
 
+
+    crud();
 
     return 0;
 }
@@ -132,8 +142,12 @@ void Bdd (){
 
     int legajo[]={1,3,5,6,7,8,9,10,22,33,44,55,66,77,99};
     char* nombre []={"Agustín", "Belen", "Camila", "Daniel", "Esteban", "Florencia", "Gonzalo", "Hugo", "Ivan", "Julieta","Kevin", "Laura", "Martín", "Natalia", "Oscar"};
+    char* nombre2[] = {"Lucas", "Sofia", "Mariano", "Valeria", "Emiliano","Patricia", "Diego", "Veronica", "Andres", "Monica","Fernando", "Silvana", "Ricardo", "Liliana", "Javier"
+};
 
     char* apellido []={"Gonzalez", "Rodriguez", "Perez", "Fernandez", "Lopez","Martinez", "Gomez", "Diaz", "Sanchez", "Romero","Alvarez", "Torres", "Ramirez", "Flores", "Benitez"};
+    char* apellido2[] = {"Molina", "Castro", "Ortega", "Rivas", "Vega","Acosta", "Herrera", "Nunez", "Silva", "Cabrera","Franco", "Peralta", "Escobar", "Miranda", "Salinas"
+};
     char* categoria[]={"oficial", "medio"," aprendiz","oficial", "medio"," aprendiz","oficial", "medio"," aprendiz","oficial", "medio"," aprendiz","oficial", "medio"," aprendiz"};
 
 
@@ -141,7 +155,7 @@ void Bdd (){
     for(i=0;i<n;i++){
         //printf("\nHola soy %s  %s mi legajo es : %d y mi categoria es %s",nombre[i],apellido[i],legajo[i],categoria[i]);
         crearNodoObrero(legajo[i],nombre [i],apellido [i],categoria [i]);
-
+        crearNodoProfesional((legajo[i])+100,nombre2[i],apellido2[i]);
     }
 };
 
@@ -154,15 +168,15 @@ nodo_obrero* insertar(){
 };
 
 nodo_obrero * crearNodoObrero(int legajo,char nombre [30],char apellido [30],char categoria[30]){
-                        //casteo para recibir el puntero del tipo especificado
-     nodo_obrero *nuevo = (nodo_obrero*)malloc(sizeof(nodo_obrero)); // Reservamos memoria
+
+     nodo_obrero *nuevo = (nodo_obrero*)malloc(sizeof(nodo_obrero)); //casteo para recibir el puntero del tipo especificado// Reservamos memoria
     if (nuevo == NULL) {
         printf("Error: No hay memoria disponible.\n");
         return NULL;
     }
 
 
-    // Llenamos los datos de la persona
+    // Llenamos los datos del obrero
     strcpy(nuevo->obrero.nombre, nombre);
     strcpy(nuevo->obrero.apellido, apellido);
     strcpy(nuevo->obrero.categoria, categoria);
@@ -177,6 +191,30 @@ nodo_obrero * crearNodoObrero(int legajo,char nombre [30],char apellido [30],cha
 
 };
 
+
+nodo_profesional * crearNodoProfesional(int legajo,char nombre [30],char apellido [30]){
+
+     nodo_profesional *nuevo = (nodo_profesional*)malloc(sizeof(nodo_profesional)); //casteo para recibir el puntero del tipo especificado// Reservamos memoria
+    if (nuevo == NULL) {
+        printf("Error: No hay memoria disponible.\n");
+        return NULL;
+    }
+
+
+    // Llenamos los datos del obrero
+    strcpy(nuevo->profesional.nombre, nombre);
+    strcpy(nuevo->profesional.apellido, apellido);
+    //nuevo->profesional.supervisada=supervisada;
+    nuevo->profesional.legajo=legajo;
+
+
+    // El nuevo nodo apunta a NULL al principio
+    nuevo->siguiente = NULL;
+
+    return nuevo;
+
+
+};
 
 
 
