@@ -101,8 +101,8 @@ void Bdd ();
 
 void crud();
 void eliminarObrero();
-void eliminarObrero();
-void modificarEmpleado();
+void eliminarProfesional();
+void eliminarEmpleado();
 int main() {
 
 
